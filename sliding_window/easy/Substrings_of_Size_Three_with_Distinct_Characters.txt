@@ -1,0 +1,68 @@
+Solution 1: Using HashMap
+- It contains hashmap and works well for any value of k (window size).
+
+class Solution {
+    public int countGoodSubstrings(String s) {
+        
+        // window size
+        int k = 3;
+
+        // check for length
+        int ln = s.length();
+        if(ln < k) {
+            return 0;
+        }
+
+        // hashmap for counting characters in window.
+        HashMap<Character, Integer> countMap = new HashMap<>();
+        int good = 0;
+
+        // for remaining characters...
+        for(int j = 0; j < ln; j++) {
+            
+            if (j >= k) {
+                // decrease/remove counter for previous character
+                countMap.put(s.charAt(j-k), countMap.get(s.charAt(j-k)) - 1);
+                if(countMap.get(s.charAt(j-k)) == 0) {
+                    countMap.remove(s.charAt(j-k));
+                }
+            }
+
+            // increase/add counter for current character
+            if(!countMap.containsKey(s.charAt(j))) {
+                countMap.put(s.charAt(j), 0);
+            }
+            countMap.put(s.charAt(j), countMap.get(s.charAt(j)) + 1);
+
+            // check for good
+            if(countMap.size() == k) {
+                good += 1;
+            }
+        }
+        
+        return good;
+
+    }
+}
+
+=======================================================================================================================
+
+Solution 2: Using direct comparison of characters inside the window.
+- There is a drawback of using this that if window size is other than 3 then it needs more comparison conditions.
+
+class Solution {
+
+
+    public int countGoodSubstrings(String s) {
+        
+        int count = 0;
+
+        for (int i = 2; i < s.length(); i++){
+            int a = s.charAt(i) , b = s.charAt(i-1) , c = s.charAt(i-2);
+            if (a!=b && b!=c && c!=a)
+                count++;
+        }
+        
+        return count;
+    }
+}

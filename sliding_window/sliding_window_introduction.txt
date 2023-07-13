@@ -1,0 +1,9 @@
+Sliding window is the coding design pattern to solve specific problems in linear time.
+
+Window moves over the data to find specific data or preform operations on that array of data, substring and etc.
+
+Window size varies based on problem definition. 
+
+For some problems, window size is fixed throughout the solution while some problems can be solved by increasing and decreasing window size according to problem definition.
+
+There are many different data structure used in order to store temporary data during the window sliding.
